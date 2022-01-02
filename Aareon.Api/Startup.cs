@@ -56,11 +56,13 @@ namespace Aareon.Api
             // Business
             services.AddScoped<IService<TicketDto>, TicketService>();
             services.AddScoped<IPersonService, PersonService>();
+            services.AddScoped<INoteService, NoteService>();
             
             // Data
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IRepository<Ticket>, Repository<Ticket>>();
             services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<INoteRepository, NoteRepository>();
             
             var corsHosts = Configuration.GetSection("Cors:AllowedOrigins").Get<List<string>>();
             services.AddCors(options =>

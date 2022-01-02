@@ -11,9 +11,14 @@ namespace Aareon.Business
             CreateMap<Ticket, TicketDto>();
             CreateMap<Person, PersonDto>()
                 .ForMember(dest => dest.FullName, o => o.MapFrom(src => $"{src.Forename} {src.Surname}") );
+            CreateMap<Note, NoteDto>();
 
             CreateMap<PersonDto, Person>();
             CreateMap<TicketDto, Ticket>()
+                .ForMember(dest => dest.Owner, opts => opts.Ignore())
+                .ForMember(dest => dest.Notes, opts => opts.Ignore())
+                .ForMember(dest => dest.PersonId, opts => opts.MapFrom(src => src.Owner.Id));
+            CreateMap<NoteDto, Note>()
                 .ForMember(dest => dest.Owner, opts => opts.Ignore())
                 .ForMember(dest => dest.PersonId, opts => opts.MapFrom(src => src.Owner.Id));
         }

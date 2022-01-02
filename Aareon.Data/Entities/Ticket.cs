@@ -1,4 +1,6 @@
-﻿namespace Aareon.Data.Entities
+﻿using System.Collections.Generic;
+
+namespace Aareon.Data.Entities
 {
     public class Ticket : DbEntity
     {
@@ -11,5 +13,6 @@
         // In that case, they'd be generated as partial classes enabling us to create our
         // own corresponding partials of them containing these annotations there instead... 
         public virtual Person Owner { get; set; }
+        public virtual IEnumerable<Note> Notes { get; set; }
     }
 }

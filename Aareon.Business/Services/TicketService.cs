@@ -51,6 +51,7 @@ namespace Aareon.Business.Services
             }
             
             var updated = _mapper.Map(dto, ticket);
+            updated.Notes = ticket.Notes;
             if (updated.PersonId != ticket.Owner.Id)
                 updated.Owner = await _uow.PersonRepo.GetById(updated.PersonId).SingleOrDefaultAsync();
             await _uow.TicketRepo.Update(updated);

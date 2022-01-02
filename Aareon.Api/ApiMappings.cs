@@ -12,6 +12,8 @@ namespace Aareon.Api
                 .ForMember(dest => dest.FullName, o => o.MapFrom(src => $"{src.Forename} {src.Surname}"));
             CreateMap<TicketModel, TicketDto>()
                 .ForMember(dest => dest.Owner, o => o.MapFrom(src => new PersonDto()));
+            CreateMap<NoteModel, NoteDto>()
+                .ForMember(dest => dest.Owner, o => o.MapFrom(src => new PersonDto()));
         }
     }
 }

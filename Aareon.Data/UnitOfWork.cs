@@ -13,13 +13,15 @@ namespace Aareon.Data
         private readonly AareonContext _context;
         public IRepository<Ticket> TicketRepo { get; }
         public IPersonRepository PersonRepo { get; }
+        public INoteRepository NoteRepo { get; }
 
         public UnitOfWork(AareonContext context, 
-            IRepository<Ticket> ticketRepo, IPersonRepository personRepo)
+            IRepository<Ticket> ticketRepo, IPersonRepository personRepo, INoteRepository noteRepo)
         {
             _context = context;
             TicketRepo = ticketRepo;
             PersonRepo = personRepo;
+            NoteRepo = noteRepo;
         }
 
         public IRepository<T> GetRepository<T>() where T : DbEntity, new()

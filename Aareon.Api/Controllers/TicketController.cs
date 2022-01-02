@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Aareon.Api.Models;
 using Aareon.Api.Utilities;
 using Aareon.Business;
@@ -18,13 +19,16 @@ namespace Aareon.Api.Controllers
     public class TicketController : Controller<TicketDto>
     {
         private readonly IService<TicketDto> _service;
+        private readonly INoteService _noteSvc;
         private readonly IMapper _mapper;
         private readonly ILogger<TicketController> _logger;
 
-        public TicketController(IService<TicketDto> service, IMapper mapper, ILogger<TicketController> logger)
+        public TicketController(IService<TicketDto> service, INoteService noteSvc, 
+            IMapper mapper, ILogger<TicketController> logger)
             : base(service, logger)
         {
             _service = service;
+            _noteSvc = noteSvc;
             _mapper = mapper;
             _logger = logger;
         }
@@ -51,6 +55,20 @@ namespace Aareon.Api.Controllers
             dto.Owner.Id = User.GetUserId();
             var ticket = await _service.Create(dto);
             return Created(BuildUri($"tickets/{ticket.Id}"), ticket);
+        }
+
+        [HttpGet]
+        [Route("{id}/notes")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> GetNotes(int id)
+        {
+            _logger.LogTrace("TicketController: GetNotes called with id: {@Id} by User {@User}", id, UserName);
+            var notes = await _noteSvc.GetByTicket(id);
+            if (!notes.Any())
+                return NoContent();
+
+            return Ok(notes);
         }
 
         [HttpPut]
