@@ -11,5 +11,6 @@ namespace Aareon.Data.Entities
         public bool IsAdmin { get; set; }
         
         public virtual IEnumerable<Ticket> Tickets { get; set; }
+        public virtual IEnumerable<Note> Notes { get; set; }
     }
 }
