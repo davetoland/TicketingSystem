@@ -1,22 +1,3 @@
-# Ticketing System
-
-
-
-## **Comments on the requirements**
-
-- A note is created by a Person to log additional information against a ticket.
-  - ***A note can be created by any Person in the database, as long as they've authenticated via /auth/login***
-- A note can be created, updated, or removed by anyone, but only an Administrator may delete an existing note.
-  - ***I've assumed that "removed" means 'decoupled from the Ticket'. Although this sounds a bit ambiguous and I would have questioned this had it not been Christmas. As is, I've taken it to mean that a Note can become orphaned from its parent Ticket, but not deleted from the system.***
-  - ***A note can be updated or removed by any Person in the database, as long as they've authenticated via /auth/login***
-  - ***A note can only be deleted by a Person in the database marked: IsAdmin, as long as they've authenticated via auth/login***
-- Any actions that are taken against records in the ticketing system are subject to monitoring and auditing.
-  - ***Auditing/logging implemented via ILogger instances. Request/Response operations are timed via Middleware. Suggestion to possible integration with ApplicationInsights or Sentry for live monitoring and handling of logs***
-- This application will be deployed automatically using a CI/CD pipeline.
-  - ***Added Migration command to Startup***
-  - ***I'm not sure exactly what you're expecting here with this requirement, but the app is self contained and can be configured by rewriting the app.settings file as part of CI, or repointing some of the settings to be environment variables, ready for deployment.***
-  - **I have experience building CI/CD pipelines, with and without Docker/K8s integration, using Azure DevOps, Team City, Jenkins etc. Also using Cake. **
-
 # **Project structure**
 
 The solution is split into three layers, top to bottom they are: 
