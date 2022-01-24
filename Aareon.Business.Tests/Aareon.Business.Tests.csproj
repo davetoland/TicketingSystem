@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AutoFixture" Version="4.17.0" />
+        <PackageReference Include="AutoFixture.AutoMoq" Version="4.17.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+        <PackageReference Include="MockQueryable.Moq" Version="5.0.1" />
+        <PackageReference Include="NUnit" Version="3.13.1" />
+        <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+        <PackageReference Include="coverlet.collector" Version="3.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Aareon.Api.Tests\Aareon.Api.Tests.csproj" />
+      <ProjectReference Include="..\Aareon.Business\Aareon.Business.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="FluentAssertions, Version=6.3.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a">
+        <HintPath>..\..\..\.nuget\packages\fluentassertions\6.3.0\lib\netcoreapp3.0\FluentAssertions.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+</Project>
